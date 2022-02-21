@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pymongo
+dotenv
+jwt
+passlib
+re
+shutil

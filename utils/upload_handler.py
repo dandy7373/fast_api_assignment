@@ -15,7 +15,7 @@ class UploadHandler():
         except shutil.Error as err :
             raise HTTPException(status_code=400,detail=err.args[0])
     
-    def store_upload_details(self,upload_details:dict,user_data:dict)->bool:
+    async def store_upload_details(self,upload_details:dict,user_data:dict)->bool:
         try:
             user_db=connection.fastapi_policyera.user.find_one({'email':user_data['email']})
             uploads=user_db.get('uploads',-1)
@@ -35,7 +35,7 @@ class UploadHandler():
         except PyMongoError as e:
             raise HTTPException(status_code=400,detail=e._message)
     
-    def get_all_uploads(self,user_data):
+    async def get_all_uploads(self,user_data):
         try:
             user_db=connection.fastapi_policyera.user.find_one({'email':user_data['email']})
             uploads=user_db['uploads']

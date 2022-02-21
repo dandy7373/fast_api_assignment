@@ -42,9 +42,9 @@ class AuthHandler():
         return self.pwd_context.verify(password,hashed_password)
 
     #signup helper for user
-    async def create_user(self, user_data:SignUpModel):
+    def create_user(self, user_data:SignUpModel):
         try:
-            if not validate_email(user_data['email']):
+            if not validate_email(user_data.email):
                 raise HTTPException(status_code=400,detail='Invalid email address')
             user_check = connection.fastapi_policyera.user.find_one(
             {'email': user_data.email})
